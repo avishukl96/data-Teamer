@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block content %}
+        <div class="row mb-2">
+          <div class="col-sm-4">
+            <h1 class="m-0">Excel / CSV</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-4">
+            <form action="/uploadCsv" method="POST" enctype="multipart/form-data">
+              <input type="file" name="file" required>
+              <button type="submit" class="btn btn-success"><i class="fa fa-upload"></i> Upload</button>
+            </form>
+          </div>
+          <div class="col-sm-4">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/AI">Home</a></li>
+              <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <table class="table table-hover" id="example1">
+            <thead>
+              <tr>
+                <td>Sr. No.</td>
+                <td>File name</td>
+                <td>File type</td>
+                <td>Last Updated</td>
+                <td>Action</td>
+              </tr>
+            </thead>
+            <tbody>
+            {% for data in file_data %}
+            <tr>
+              <td>{{data.id}}</td>
+              <td>{{data.filename}}</td>
+              <td>CSV</td>
+              <td>{{data.updated_date}}</td>
+              <td>
+<!--                <button type="button" class="btn btn-primary" value="{{data.id}}"><i class="fa fa-download"></i></button>-->
+                <a href="/download/{{data.id}}"><i class="fa fa-download"></i> Download</a>
+                <button type="button" class="btn btn-danger del_btn" value="{{data.id}}" file_name="{{data.filename}}" ><i class="fa fa-trash"></i></button>
+              </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+        {% endblock content%}
+        {% block script%}
+ <script>
+  $(function () {
+    $("#example1").DataTable({
+
+<!--    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');-->
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
+        {% endblock script %}

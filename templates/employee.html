@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+{% block content %}
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Employee</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li><button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default"><i class="fa fa-plus"></i>Employee</button></li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      <!-- /.container-fluid -->
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-hover" style="width:100%">
+              <thead>
+                <tr>
+                  <th>Sr. No.</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Mobile</th>
+                  <th>status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {% for d in data %}
+                  <tr>
+                    <td>{{loop.index}}</td>
+                    <td>{{d.name}}</td>
+                    <td>{{d.emp_email}}</td>
+                    <td>{{d.emp_mobile}}</td>
+                    {% if d.isActive %}
+                    <td>Active</td>
+                    {% else %}
+                    <td>Inactive</td>
+                    {% endif %}
+                    <td>
+                      <button type="button" class="btn btn-success edit_emp" value="{{d.id}}"><i class="fa fa-edit"></i></button>
+                      <a class="btn btn-danger" href="/deleteEmp/{{d.id}}"><i class="fa fa-trash"></i></a>
+                    </td>
+                    <!-- only for practice this -->
+<!--                    <td>-->
+<!--                      <button type="button" id="btn1" class="btn btn-primary">-->
+<!--                        click here-->
+<!--                      </button>-->
+<!--                    </td>-->
+<!--                      <td>-->
+<!--                          <button type="button" id="btn2" class="btn-stripped btn-danger">del</button>-->
+<!--                      </td>-->
+                  </tr>
+                  {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+<!--Modal-->
+<div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Add Employee</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+               <form action="/employee" method="post">
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="emp_name" placeholder="Employee Name" required>
+                    <div class="input-group-append">
+                      <div class="input-group-text">
+                        <span class="fas fa-user"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="input-group mb-3">
+                    <input type="email" name="emp_email" class="form-control" placeholder="Email" required>
+                    <div class="input-group-append">
+                      <div class="input-group-text">
+                        <span class="fas fa-envelope"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="input-group mb-3">
+                    <input type="text" name="emp_mobile" minlength="10" maxlength="10" class="form-control" placeholder="Mobile" required>
+                    <div class="input-group-append">
+                      <div class="input-group-text">
+                        <span class="fas fa-phone"></span>
+                      </div>
+                    </div>
+                  </div>
+          <!--        <div class="input-group mb-3">-->
+          <!--          <input type="text" name="org" class="form-control" placeholder="Organization">-->
+          <!--          <div class="input-group-append">-->
+          <!--            <div class="input-group-text">-->
+          <!--              <span class="fas fa-users"></span>-->
+          <!--            </div>-->
+          <!--          </div>-->
+          <!--        </div>-->
+          <!--        <div class="input-group mb-3">-->
+          <!--          <input type="email" class="form-control" placeholder="Role">-->
+          <!--          <div class="input-group-append">-->
+          <!--            <div class="input-group-text">-->
+          <!--              <span class="fas fa-envelope"></span>-->
+          <!--            </div>-->
+          <!--          </div>-->
+          <!--        </div>-->
+          <!--        <div class="input-group mb-3">-->
+          <!--          <input type="password" name="password" class="form-control" placeholder="Password">-->
+          <!--          <div class="input-group-append">-->
+          <!--            <div class="input-group-text">-->
+          <!--              <span class="fas fa-lock"></span>-->
+          <!--            </div>-->
+          <!--          </div>-->
+          <!--        </div>-->
+          <!--        <div class="input-group mb-3">-->
+          <!--          <input type="password" name="confirm_password" class="form-control" placeholder="Retype password">-->
+          <!--          <div class="input-group-append">-->
+          <!--            <div class="input-group-text">-->
+          <!--              <span class="fas fa-lock"></span>-->
+          <!--            </div>-->
+          <!--          </div>-->
+          <!--        </div>-->
+                  <div class="row">
+                    <!-- /.col -->
+                    <div class="col-3">
+                      <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-plus"></i> Add</button>
+                    </div>
+                    <!-- /.col -->
+                  </div>
+               </form>
+            </div>
+            <div class="modal-footer justify-content-between">
+<!--              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+<!--              <button type="button" class="btn btn-primary">Save changes</button>-->
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+
+<div class="modal fade" id="modal-edit">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Edit Employee</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+               <form action="/editEmp" method="post">
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="emp_name" id="emp_name" placeholder="Employee Name" required>
+                    <div class="input-group-append">
+                      <div class="input-group-text">
+                        <span class="fas fa-user"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="input-group mb-3">
+                    <input type="email" name="emp_email" class="form-control" id="emp_email" placeholder="Email" required>
+                    <div class="input-group-append">
+                      <div class="input-group-text">
+                        <span class="fas fa-envelope"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="input-group mb-3">
+                    <input type="text" name="emp_mobile" id="emp_mobile" minlength="10" maxlength="10" class="form-control" placeholder="Mobile" required>
+                    <div class="input-group-append">
+                      <div class="input-group-text">
+                        <span class="fas fa-phone"></span>
+                      </div>
+                    </div>
+                  </div>
+                 <input type="hidden" name="emp_id" id="emp_id">
+                  <div class="row">
+                    <!-- /.col -->
+                    <div class="col-3">
+                      <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-pen"></i> Update</button>
+                    </div>
+                    <!-- /.col -->
+                  </div>
+               </form>
+            </div>
+            <div class="modal-footer justify-content-between">
+<!--              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+<!--              <button type="button" class="btn btn-primary">Save changes</button>-->
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+<!--Modal End-->
+{% endblock content %}

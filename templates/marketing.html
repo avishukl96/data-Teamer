@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block content %}
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Dashboard</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/AI">Home</a></li>
+              <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+
+        <div class="row">
+          <div class="col-md-3">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title"><h3>csv</h3></div>
+              </div>
+              <div class="card-body" id="us1" f_name="sales">
+               <a href="/marketing/csv"><i style="font-size:100px; color:orange;" class="fa fa-folder"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title"><h3>doc</h3></div>
+              </div>
+              <div class="card-body" id="us2">
+               <a href="https://dteamer-bucket.s3.ap-south-1.amazonaws.com/DT/">
+                 <i style="font-size:100px; color:orange;" class="fa fa-folder"></i>
+               </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title"><h3>image</h3></div>
+              </div>
+              <div class="card-body" id="us3">
+               <a href="https://dteamer-bucket.s3.ap-south-1.amazonaws.com/DT/">
+                 <i style="font-size:100px; color:orange;" class="fa fa-folder"></i>
+               </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title"><h3>pdf</h3></div>
+              </div>
+              <div class="card-body" id="us4">
+               <a href="https://dteamer-bucket.s3.ap-south-1.amazonaws.com/DT/">
+                 <i style="font-size:100px; color:orange;" class="fa fa-folder"></i>
+               </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /.container-fluid -->
+    </section>
+ {% endblock content %}
